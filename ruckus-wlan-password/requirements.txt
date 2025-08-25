@@ -1,3 +1,2 @@
-aioruckus
 requests
 xkcdpass
