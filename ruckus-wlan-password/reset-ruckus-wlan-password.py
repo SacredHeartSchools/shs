@@ -287,7 +287,7 @@ def main():
         # Generate a new password, reset the target Ruckus WLAN to it, and
         # send an email with the new password
         password   = generate_password(args)
-        ruckus_patch_wlan_password(session, zone_entry, wlan_entry, wlan, password)
+        ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password)
         send_email(args, password)
 
         # Logout of the Ruckus API
