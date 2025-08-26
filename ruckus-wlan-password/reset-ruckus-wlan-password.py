@@ -205,7 +205,7 @@ def ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password
     #
     # Probably need some logic here to choose between 'passphrase' and
     # 'saePassphrase', depending on the wlan['mode'] value
-    mode = wlan['mode']
+    mode = wlan['encryption']['method']
     if mode in [ "WPA2", "WPA_Mixed" ]:
         key = 'passphrase'
     elif mode in [ "WPA3", "WPA23_Mixed" ]:
@@ -225,7 +225,7 @@ def ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password
 
     logging.info(f'Changing Ruckus WLAN "{wlan_name}" (ID: {wlan_id}) password...')
     r = session.patch(url, verify=False, data=json.dumps(patch))
-    logging.debug("Ruckus login API result")
+    logging.debug("Ruckus patch API result")
     logging.debug(r.text)
 
 #-----------------------------------------------------------------------
@@ -238,6 +238,7 @@ def send_email(args, password):
 <p>Your friendly daemon,<br />
 Howard</p>'''
 
+    logging.debug(f"Connecting to SMTP server {args.smtp_server}")
     with smtplib.SMTP(host=args.smtp_server,
                       local_hostname=args.smtp_local_hostname,
                       port=args.smtp_port) as smtp:
