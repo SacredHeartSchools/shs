@@ -235,7 +235,7 @@ def send_email(args, password):
 
 <p>{password}</p>
 
-<p>Your friendly Sacred Heart IT Team<br />
+<p>Your friendly Sacred Heart IT Team<br /></p>
 
     logging.debug(f"Connecting to SMTP server {args.smtp_server}")
     with smtplib.SMTP(host=args.smtp_server,
