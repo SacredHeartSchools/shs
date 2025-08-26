@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import sys
 import json
 import string
 import urllib3
@@ -192,7 +191,7 @@ def generate_password(args):
 #-----------------------------------------------------------------------
 
 # Patch the Ruckus WLAN to change the password
-def ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password):
+def ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password, args):
     zone_id   = zone_entry['id']
     wlan_id   = wlan_entry['id']
     wlan_name = wlan_entry['name']
@@ -288,7 +287,7 @@ def main():
         # Generate a new password, reset the target Ruckus WLAN to it, and
         # send an email with the new password
         password   = generate_password(args)
-        ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password)
+        ruckus_patch_wlan_passphrase(session, zone_entry, wlan_entry, wlan, password, args)
         send_email(args, password)
 
         # Logout of the Ruckus API
